@@ -1,8 +1,11 @@
 import pandas as pd
-
+import os
 # Input and output file
-input_file = "/TimeShift_TradeHistory/output_flatten at 14 and window.xlsx"
-output_file = "../XLSX_files_split/output/output_flatten at 14 and window shifted to local.xlsx"
+
+input_file = "../TimeShift_TradeHistory/inputs/flatten at 14 and window plus dynamic lot.xlsx"
+file_name = os.path.basename(input_file)  # Extract file name from input_file
+output_file = f"../TimeShift_TradeHistory/outputs/time shifted {file_name}"
+
 
 # Read Excel
 print("Reading file:", input_file)
