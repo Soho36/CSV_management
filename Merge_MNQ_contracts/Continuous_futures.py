@@ -9,6 +9,7 @@ files = [
     "cont5.csv",
     "cont6.csv",
     "cont7.csv",
+    "cont8.csv",
 ]
 
 print(f"Combining files: {files}")

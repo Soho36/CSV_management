@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Input and output file paths
-input_file = "merged_files/MNQ_merged.csv"
-output_file = "merged_files/MNQ_merged_spread.csv"
+input_file = "merged_files_outputs/MNQ_merged.csv"
+output_file = "merged_files_outputs/MNQ_merged_spread.csv"
 
 # Read CSV (tab-delimited)
 print("Reading file:", input_file)

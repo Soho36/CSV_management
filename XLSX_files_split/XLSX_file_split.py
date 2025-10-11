@@ -2,7 +2,7 @@ import pandas as pd
 import math
 
 # Input file
-input_file = "output_shifted_plus_3_hours.xlsx"
+input_file = "output/output_flatten at 14 and window shifted to local.xlsx"
 
 # Output base name
 output_base = "trades_part"

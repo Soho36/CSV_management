@@ -9,7 +9,10 @@
 /XLSX_files_split/ReportTester-1535350_shorts.xlsx
 /XLSX_files_split/Shorts_to_marketstat.xlsx
 /XLSX_files_split/1.xlsx
-/TimeShift_TradeHistory/flatten at close plus time window to ms.xlsx
-/XLSX_files_split/output_shifted_plus_3_hours.xlsx
-/Merge_MNQ_contracts/files_to_merge/
-/Merge_MNQ_contracts/merged_files/
+/TimeShift_TradeHistory/inputs/flatten at close plus time window to ms.xlsx
+/XLSX_files_split/output/output_shifted_plus_3_hours.xlsx
+/Merge_MNQ_contracts/files_to_merge_inputs/
+/Merge_MNQ_contracts/merged_files_outputs/
+/TimeShift_TradeHistory/inputs/
+/TimeShift_TradeHistory/outputs/
+/XLSX_files_split/input/

@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Input and output file
-input_file = "/Merge_MNQ_contracts/merged_files/MNQ_merged_spread.csv"
+input_file = "/Merge_MNQ_contracts/merged_files_outputs\\MNQ_merged_spread.csv"
 output_file = "MNQ_merged_spread_shifted_back_3_hours.csv"
 
 # Read CSV

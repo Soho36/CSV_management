@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Input and output file
-input_file = "flatten at close plus time window to ms.xlsx"
-output_file = "../XLSX_files_split/output_shifted_plus_3_hours.xlsx"
+input_file = "/TimeShift_TradeHistory/output_flatten at 14 and window.xlsx"
+output_file = "../XLSX_files_split/output/output_flatten at 14 and window shifted to local.xlsx"
 
 # Read Excel
 print("Reading file:", input_file)
