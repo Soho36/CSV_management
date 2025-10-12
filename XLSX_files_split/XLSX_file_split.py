@@ -3,7 +3,7 @@ import math
 import os
 
 # Input file
-input_file = "../XLSX_files_split/input/time shifted flatten at 14 and window plus dynamic lot.xlsx"
+input_file = "../XLSX_files_split/input/time shifted 1500 start to see number of blowups with 1 contract.xlsx"
 file_name = os.path.basename(input_file)  # Extract file name from input_file
 # Output base name
 output_base = f"trades_part_{file_name}"
@@ -25,6 +25,6 @@ for i in range(num_parts):
     end = start + rows_per_file
     chunk = df.iloc[start:end]
 
-    output_file = f"../XLSX_files_split/output/{i + 1}_{output_base}.xlsx"
+    output_file = f"../XLSX_files_split/output/{i + 1}_{output_base}"
     chunk.to_excel(output_file, index=False)
     print(f"Saved {output_file} with {len(chunk)} rows")

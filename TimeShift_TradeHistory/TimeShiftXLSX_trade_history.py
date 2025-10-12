@@ -2,7 +2,7 @@ import pandas as pd
 import os
 # Input and output file
 
-input_file = "../TimeShift_TradeHistory/inputs/flatten at 14 and window plus dynamic lot.xlsx"
+input_file = "../TimeShift_TradeHistory/inputs/1500 start to see number of blowups with 1 contract.xlsx"
 file_name = os.path.basename(input_file)  # Extract file name from input_file
 output_file = f"../TimeShift_TradeHistory/outputs/time shifted {file_name}"
 
