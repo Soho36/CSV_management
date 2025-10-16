@@ -15,9 +15,9 @@ df['P/L (Net)'] = (
 )
 
 # === CONFIG ===
-TARGET = 3000               # profit target per run
-MAX_DD = 2500               # maximum drawdown allowed before "blowup"
-SIZE = 4                    # static lot size (if not using dynamic)
+TARGET = 1500               # profit target per run
+MAX_DD = 1500               # maximum drawdown allowed before "blowup"
+SIZE = 1                    # static lot size (if not using dynamic)
 CONTRACT_STEP = 200         # add/remove 1 contract per $500 gain/loss
 USE_DYNAMIC_LOT = False     # 🔄 switch: True = dynamic lot, False = static
 SAVE_CONTRACT_LOG = True    # <--- set to False to skip detailed log
