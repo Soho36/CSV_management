@@ -2,6 +2,7 @@ import pandas as pd
 
 # --- Load & clean data ---
 df = pd.read_csv("../1500 count/csvs/with_pnl.csv", sep="\t")
+pd.set_option('display.width', 1000)
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 
@@ -21,7 +22,7 @@ SIZE = 1                    # static lot size (if not using dynamic)
 CONTRACT_STEP = 200         # add/remove 1 contract per $500 gain/loss
 USE_DYNAMIC_LOT = False     # 🔄 switch: True = dynamic lot, False = static
 SAVE_CONTRACT_LOG = True    # <--- set to False to skip detailed log
-MAX_RUNS_TO_LOG = 100       # limit detailed log to first N runs
+MAX_RUNS_TO_LOG = 1000       # limit detailed log to first N runs
 # ==============
 
 results = []
