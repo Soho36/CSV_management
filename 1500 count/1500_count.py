@@ -15,13 +15,13 @@ df['P/L (Net)'] = (
 )
 
 # === CONFIG ===
-TARGET = 1500               # profit target per run
-MAX_DD = 1500               # maximum drawdown allowed before "blowup"
-SIZE = 1                    # static lot size (if not using dynamic)
-CONTRACT_STEP = 500         # add/remove 1 contract per $500 gain/loss
-USE_DYNAMIC_LOT = True     # 🔄 switch: True = dynamic lot, False = static
+TARGET = 3000               # profit target per run
+MAX_DD = 2500               # maximum drawdown allowed before "blowup"
+SIZE = 4                    # static lot size (if not using dynamic)
+CONTRACT_STEP = 200         # add/remove 1 contract per $500 gain/loss
+USE_DYNAMIC_LOT = False     # 🔄 switch: True = dynamic lot, False = static
 SAVE_CONTRACT_LOG = True    # <--- set to False to skip detailed log
-MAX_RUNS_TO_LOG = 50
+MAX_RUNS_TO_LOG = 100       # limit detailed log to first N runs
 # ==============
 
 results = []
@@ -186,8 +186,9 @@ else:
     hist_data = pd.DataFrame(columns=["Days", "Took_days"])
 
 # --- Save all to Excel ---
-folder = "../1500 count/Runs_reports_xls_dynamic" if USE_DYNAMIC_LOT else "../1500 count/Runs_reports_xls"
-filename = f"pnl_growth_report_{'dynamic' if USE_DYNAMIC_LOT else 'static'}_{TARGET}_{MAX_DD}_{SIZE}.xlsx"
+folder = "../1500 count/Runs_reports_dynamic" if USE_DYNAMIC_LOT else "../1500 count/Runs_reports_static"
+filename = f"dynamic_pnl_growth_report_{TARGET}_{MAX_DD}_{SIZE}_{CONTRACT_STEP}" if USE_DYNAMIC_LOT \
+    else f"static_pnl_growth_report_{TARGET}_{MAX_DD}_{SIZE}.xlsx"
 
 with pd.ExcelWriter(f"{folder}/{filename}") as writer:
     results_df.to_excel(writer, sheet_name="All Runs", index=False)
@@ -197,7 +198,7 @@ with pd.ExcelWriter(f"{folder}/{filename}") as writer:
 
 if SAVE_CONTRACT_LOG:
     details_df = pd.DataFrame(detailed_log)
-    details_path = f"../1500 count/Runs_reports_xls_dynamic/contracts_log_{TARGET}_{MAX_DD}_{SIZE}.csv"
+    details_path = f"../1500 count/Logs/contracts_log_{TARGET}_{MAX_DD}_{SIZE}_{CONTRACT_STEP}.csv"
     details_df.to_csv(details_path, index=False, sep="\t")
     print(f"\n📄 Detailed contract log saved to: {details_path}")
 

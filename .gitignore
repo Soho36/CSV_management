@@ -10,5 +10,6 @@
 /XLSX_files_split/input/
 /XLSX_files_split/output/
 /1500 count/csvs/
-/1500 count/Runs_reports_xls/
-/1500 count/Runs_reports_xls_dynamic/
+/1500 count/Runs_reports_static/
+/1500 count/Runs_reports_dynamic/
+/1500 count/Logs/
