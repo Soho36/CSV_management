@@ -4,6 +4,7 @@ import pandas as pd
 df = pd.read_csv("../1500 count/csvs/with_pnl.csv", sep="\t")
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
+pd.set_option('display.width', 1000)  # Increase display width
 
 # Clean number formatting
 df['P/L (Net)'] = (
@@ -15,19 +16,17 @@ df['P/L (Net)'] = (
 )
 
 # === CONFIG ===
-TARGET = 1500               # profit target per run
-MAX_DD = 1500               # maximum drawdown allowed before "blowup"
-SIZE = 1                    # static lot size (if not using dynamic)
-CONTRACT_STEP = 200         # add/remove 1 contract per $500 gain/loss
+TARGET = 6000               # profit target per run
+MAX_DD = 3000               # maximum drawdown allowed before "blowup"
+SIZE = 2                    # static lot size (if not using dynamic)
+CONTRACT_STEP = 500         # add/remove 1 contract per $500 gain/loss
 USE_DYNAMIC_LOT = False     # 🔄 switch: True = dynamic lot, False = static
 SAVE_CONTRACT_LOG = True    # <--- set to False to skip detailed log
-MAX_RUNS_TO_LOG = 100       # limit detailed log to first N runs
+MAX_RUNS_TO_LOG = 2000       # limit detailed log to first N runs
 # ==============
 
 results = []
 detailed_log = []
-# Optional detailed logging
-
 
 # --- Loop through every possible starting date ---
 for start_idx in range(len(df)):
@@ -36,6 +35,10 @@ for start_idx in range(len(df)):
     days = 0
     reached = False
     blown = False
+
+    # --- reset trailing DD vars per run ---
+    peak_pnl = 0
+    trailing_floor = -MAX_DD
 
     # --- dynamic lot setup ---
     contracts = SIZE if not USE_DYNAMIC_LOT else 1
@@ -46,11 +49,7 @@ for start_idx in range(len(df)):
         contract_history.append(contracts)
 
         # --- Apply today's PnL ---
-        if USE_DYNAMIC_LOT:
-            pnl_today = df.loc[i, 'P/L (Net)'] * contracts
-        else:
-            pnl_today = df.loc[i, 'P/L (Net)'] * SIZE
-
+        pnl_today = df.loc[i, 'P/L (Net)'] * (contracts if USE_DYNAMIC_LOT else SIZE)
         cumulative_pnl += pnl_today
         min_cumulative_pnl = min(min_cumulative_pnl, cumulative_pnl)
         days += 1
@@ -62,18 +61,25 @@ for start_idx in range(len(df)):
                 "Date": df.loc[i, 'Date'],
                 "Contracts": contracts,
                 "PnL_Today": round(pnl_today, 2),
-                "Cumulative_PnL": round(cumulative_pnl, 2)
+                "Cumulative_PnL": round(cumulative_pnl, 2),
+                "Peak_PnL": round(peak_pnl, 2),
+                "Trailing_Floor": round(trailing_floor, 2)
             })
+
         # --- Update contract size dynamically (only if enabled) ---
         if USE_DYNAMIC_LOT:
             contracts = max(1, 1 + int(cumulative_pnl // CONTRACT_STEP))
 
+        # --- Update trailing DD ---
+        peak_pnl = max(peak_pnl, cumulative_pnl)
+        trailing_floor = peak_pnl - MAX_DD
+
         # --- Check blowup condition ---
-        if abs(min_cumulative_pnl) >= MAX_DD:
+        if cumulative_pnl < trailing_floor:
             results.append({
                 "Start_Date": df.loc[start_idx, 'Date'],
                 "Rows_to_+Target": None,
-                "Max_Drawdown": abs(min_cumulative_pnl),
+                "Max_Drawdown": peak_pnl - cumulative_pnl,
                 "Average_Contracts": sum(contract_history) / len(contract_history) if USE_DYNAMIC_LOT else SIZE,
                 "Minimum_Contracts": min(contract_history) if USE_DYNAMIC_LOT else SIZE,
                 "Maximum_Contracts": max(contract_history) if USE_DYNAMIC_LOT else SIZE,
@@ -187,7 +193,7 @@ else:
 
 # --- Save all to Excel ---
 folder = "../1500 count/Runs_reports_dynamic" if USE_DYNAMIC_LOT else "../1500 count/Runs_reports_static"
-filename = f"dynamic_pnl_growth_report_{TARGET}_{MAX_DD}_{SIZE}_{CONTRACT_STEP}" if USE_DYNAMIC_LOT \
+filename = f"dynamic_pnl_growth_report_{TARGET}_{MAX_DD}_{SIZE}_{CONTRACT_STEP}.xlsx" if USE_DYNAMIC_LOT \
     else f"static_pnl_growth_report_{TARGET}_{MAX_DD}_{SIZE}.xlsx"
 
 with pd.ExcelWriter(f"{folder}/{filename}") as writer:
@@ -198,9 +204,11 @@ with pd.ExcelWriter(f"{folder}/{filename}") as writer:
 
 if SAVE_CONTRACT_LOG:
     details_df = pd.DataFrame(detailed_log)
-    details_path = f"../1500 count/Logs/contracts_log_{TARGET}_{MAX_DD}_{SIZE}_{CONTRACT_STEP}.csv"
+    details_path = f"../1500 count/Logs/dynamic_contracts_log_{TARGET}_{MAX_DD}_{SIZE}_{CONTRACT_STEP}.csv" if USE_DYNAMIC_LOT \
+        else f"../1500 count/Logs/static_contracts_log_{TARGET}_{MAX_DD}_{SIZE}.csv"
     details_df.to_csv(details_path, index=False, sep="\t")
     print(f"\n📄 Detailed contract log saved to: {details_path}")
+
 
 print(f"\n✅ Excel report created: {filename}")
 print("   Sheets: [All Runs, Summary Stats, Histogram]")
