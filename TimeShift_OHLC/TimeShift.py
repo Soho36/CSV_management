@@ -1,6 +1,6 @@
 import pandas as pd
 
-# Input and output file
+# Input and output2 file
 input_file = "/Merge_MNQ_contracts/merged_files_outputs\\MNQ_merged_spread.csv"
 output_file = "MNQ_merged_spread_shifted_back_3_hours.csv"
 

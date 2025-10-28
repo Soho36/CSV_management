@@ -8,8 +8,9 @@
 /TimeShift_TradeHistory/inputs/
 /TimeShift_TradeHistory/outputs/
 /XLSX_files_split/input/
-/XLSX_files_split/output/
+/XLSX_files_split/output2/
 /1500 count/csvs/
 /1500 count/Runs_reports_static/
 /1500 count/Runs_reports_dynamic/
 /1500 count/Logs/
+/XLSX_files_split/output/
