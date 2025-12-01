@@ -3,7 +3,7 @@ import math
 import os
 
 # Input file
-input_file = "../XLSX_files_split/input/time_shifted_99.xlsx"
+input_file = "../XLSX_files_split/inputs/time_shifted_100.xlsx"
 file_name = os.path.basename(input_file)  # Extract file name from input_file
 # Output base name
 output_base = f"trades_part_{file_name}"
