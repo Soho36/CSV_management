@@ -22,7 +22,7 @@ def merging_files():
         merged_df = pd.concat(data_frames, ignore_index=True)
         print('Merged dataframes: ', merged_df.head())
 
-        merged_df.to_csv(f'TXT/merged_data.csv', index=False)  # Writing merged CSV
+        merged_df.to_csv(f'TXT/merged_data.csv', index=False)  # Writing input CSV
 
 
 merging_files()

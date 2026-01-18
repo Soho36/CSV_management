@@ -11,7 +11,7 @@ dfs = [pd.read_csv(os.path.join(path_input, f), sep='\t') for f in os.listdir(pa
 df_all = pd.concat(dfs, ignore_index=True)
 print(f"Combined DataFrame shape: {df_all.shape}")
 
-# Save final merged file in MT5 format (tab-delimited, same header)
+# Save final input file in MT5 format (tab-delimited, same header)
 output_path = "../Merge_MNQ_contracts/files_to_merge_outputs/MNQ_merged.csv"
 df_all.to_csv(output_path, sep='\t', index=False)
 

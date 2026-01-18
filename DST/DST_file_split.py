@@ -6,8 +6,8 @@ from pathlib import Path
 # ===============================
 INPUT_CSV = "../DST/MNQ_merged_no_spread.csv"           # your source file
 OUTPUT_DIR_SPLITS = "splits"                            # output folder
-OUTPUT_DIR_MERGED = "merged"                            # output folder for merged files
-MERGE_DST_FILES = True                                  # True = save merged DST / NO_DST, False = skip
+OUTPUT_DIR_MERGED = "merged"                            # output folder for input files
+MERGE_DST_FILES = True                                  # True = save input DST / NO_DST, False = skip
 
 # Column names for date and time
 date_col = "<DATE>"

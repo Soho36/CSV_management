@@ -6,7 +6,7 @@
 /Merge_MNQ_contracts/files_to_merge_inputs/
 /Merge_MNQ_contracts/merged_files_outputs/
 /TimeShift_TradeHistory/inputs/
-/TimeShift_TradeHistory/outputs/
+/TimeShift_TradeHistory/output/
 /XLSX_files_split/input/
 /XLSX_files_split/output2/
 /1500 count/csvs/
@@ -27,3 +27,5 @@
 /DST/splits/
 /DST/merged/
 /Merge_MNQ_contracts/MNQ_merged.csv
+/TimeShift_OHLC/input/
+/TimeShift_OHLC/output/
