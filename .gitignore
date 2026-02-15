@@ -29,3 +29,14 @@
 /Merge_MNQ_contracts/MNQ_merged.csv
 /TimeShift_OHLC/input/
 /TimeShift_OHLC/output/
+/Merge_MES_contracts/MESH24.csv
+/Merge_MES_contracts/MESH25.csv
+/Merge_MES_contracts/MESH26.csv
+/Merge_MES_contracts/MESM24.csv
+/Merge_MES_contracts/MESM25.csv
+/Merge_MES_contracts/MESU24.csv
+/Merge_MES_contracts/MESU25.csv
+/Merge_MES_contracts/MESZ24.csv
+/Merge_MES_contracts/MESZ25.csv
+/Merge_MES_contracts/merged_futures.csv
+/No_spread/MES_merged_futures.csv
